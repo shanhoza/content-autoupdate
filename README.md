@@ -35,3 +35,7 @@ poetry run python -m content_autoupdate
 - Реализовать функционал отправки обновленной информации
 
 - Deploy
+
+# Refactor:
+
+- Отрефачить файлы sources, sources_parsers, download_files, archives, вынести бизнес логику в сервисы, ручки в контроллеры

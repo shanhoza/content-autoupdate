@@ -4,21 +4,27 @@ version = "0.1.0"
 description = ""
 authors = ["Vitaly Sokol <shanhozas@gmail.com>"]
 readme = "README.md"
+packages = [{include = "content_autoupdate"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+
 tqdm = "^4.64.1"
 httpx = "^0.23.3"
 lxml = "^4.9.2"
 colorama = "^0.4.6"
 aiofiles = "^22.1.0"
-pyunpack = "^0.3"
-rarfile = "^4.0"
 requests = "^2.28.2"
 loguru = "^0.6.0"
 bs4 = "^0.0.1"
 fake-useragent = "^1.1.1"
 
+pyunpack = "^0.3"
+rarfile = "^4.0"
+python-dotenv = "^0.21.1"
+
+[tool.poetry.group.dev.dependencies]
+pyright = "^1.1.292"
 
 [build-system]
 requires = ["poetry-core"]
