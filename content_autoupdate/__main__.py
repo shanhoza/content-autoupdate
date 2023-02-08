@@ -1,15 +1,16 @@
 import asyncio
 from loguru import logger
 
-from content_autoupdate import config, sources
+from content_autoupdate import config
+from content_autoupdate.services import downloads
+from content_autoupdate.controllers import sources
 
 
 @logger.catch
 async def main() -> None:
-    posts = sources.get_posts_info()
-    posts = await sources.get_info_from_sources(posts)
-    write(posts, "posts.json") # вынести в другой слой
-    await download_files(posts) # Скрыть детали реализации функции (await убрать)
+    posts = await sources.get_posts()
+    posts_with_source_urls = await sources.get_sources_info(posts)
+    await downloads.download_files_from_posts(posts_with_source_urls) 
 
 
 if __name__ == "__main__":
@@ -21,3 +22,4 @@ if __name__ == "__main__":
         logger.warning(traceback.format_exc())
     finally:
         config.complete_logger()
+
