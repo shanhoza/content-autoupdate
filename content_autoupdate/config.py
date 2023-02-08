@@ -7,6 +7,7 @@ from loguru import logger
 from tqdm.asyncio import tqdm
 import asyncio
 
+
 load_dotenv()
 
 Url: TypeAlias = str
@@ -47,6 +48,7 @@ def configure_environment():
 
 def complete_logger() -> None:
     asyncio.run(_async_complete_logger())
+
 
 async def _async_complete_logger() -> None:
     await logger.complete()
