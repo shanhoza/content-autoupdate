@@ -15,11 +15,11 @@ def form_api_url(url: config.Url, domain_name: str) -> config.Url | None:
 
 def parse_site(response: httpx.Response, domain_name: str) -> config.Url | None:
     parser_switch = {
-        "wotsite.net": _parse_wotsite,     ■ "_parse_wotsite" is not defined
-        "wotspeak.org": _parse_wotspeak,     ■ "_parse_wotspeak" is not defined
-        "modxvm.com": _parse_modxvm,     ■ "_parse_modxvm" is not defined
-        "wgmods.net": _parse_wgmods,     ■ "_parse_wgmods" is not defined
-        "protanki.tv": _parse_protanki,     ■ "_parse_protanki" is not defined
+        "wotsite.net": _parse_wotsite,     
+        "wotspeak.org": _parse_wotspeak,
+        "modxvm.com": _parse_modxvm,     
+        "wgmods.net": _parse_wgmods,   
+        "protanki.tv": _parse_protanki,
     }
     return parser_switch[domain_name](response)
 
