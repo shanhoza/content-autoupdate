@@ -15,8 +15,8 @@ from content_autoupdate.services.parsers import parse_site, form_api_url
 
 async def get_posts() -> tuple[Post]:
     await send_request("POST", config.AUTH_URL, auth=(
-        config.EMAIL_ADDRESS, 
-        config.EMAIL_PASSWORD
+            config.EMAIL_ADDRESS, 
+            config.EMAIL_PASSWORD
         )
     )
     response = await send_request("GET", config.PUBLICATIONS_URL)
@@ -60,7 +60,7 @@ def _parse_posts(response: httpx.Response) -> tuple[Post]:
 async def _task_get_source_info(client: httpx.AsyncClient, post: Post) -> Post:
     url, url_domain_name = _prepare_source_connection(post.source_url)
     response = await send_request("GET", url)
-    post.source_download_url = _parse_download_url(response, url_domain_name)
+    post.source_download_url = parsers.parse_site(response, url_domain_name)
 
     if not post.source_download_url:
         logger.info(f'Post {post.title} did not pass the version check \
@@ -84,16 +84,9 @@ def _get_domain_name(url: config.Url) -> str:
     return url.split("//")[-1].split("/")[0].split("?")[0]
 
 
-def _parse_download_url(
-        response: httpx.Response, 
-        domain_name: str
-) -> config.Url | None:
-    parsers.parse_site(response, domain_name)
-
-
 def _convert_google_drive_url_to_download_url(url: config.Url) -> config.Url:
     """If the source download url is a link to a google drive view, 
-       it will convert it to a google drive download url"""
+       it will be converted to a google drive download url"""
     file_id = url.rsplit('/', 2)[1]
     return f'https://drive.google.com/uc?id={file_id}&confirm=1'
 
