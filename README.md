@@ -27,15 +27,3 @@ cp content_autoupdate/.env.example content_autoupdate/.env
 poetry install
 poetry run python -m content_autoupdate
 ```
-
-## Todo:
-
-- Refactor
-
-- Реализовать функционал отправки обновленной информации
-
-- Deploy
-
-# Refactor:
-
-- Отрефачить файлы sources, sources_parsers, download_files, archives, вынести бизнес логику в сервисы, ручки в контроллеры
